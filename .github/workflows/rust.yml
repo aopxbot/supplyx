@@ -3,26 +3,34 @@ name: Rust CI/CD Workflow
 on:
   push:
     branches:
-      - main
+      - main  # Utilisez 'main' pour pousser dans la branche principale
   pull_request:
     branches:
-      - main
+      - main  # Pour les pull requests vers 'main'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Utilisation de l'environnement Ubuntu pour la construction
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Vérifier le code source du dépôt
 
       - name: Set up Rust
-        uses: actions/setup-rust@v1
+        uses: actions/setup-rust@v1  # Installer Rust
         with:
-          rust-version: 1.83.0  # Utilisez la version de Rust que vous utilisez
+          rust-version: 1.83.0  # Assurez-vous d'utiliser la version de Rust correcte
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libssl-dev  # Installation des dépendances nécessaires
 
       - name: Build the project
-        run: cargo build --release
+        run: cargo build --release  # Compiler le projet en mode release
 
-      - name: Run the application
-        run: cargo run
+      - name: Run the tests
+        run: cargo test  # Exécuter les tests si vous en avez
+
+      - name: Run the project
+        run: cargo run  # Lancer le projet si nécessaire (s'assurer que c'est approprié dans votre CI)
