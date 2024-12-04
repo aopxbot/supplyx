@@ -7,3 +7,7 @@ edition = "2021"
 ed25519-dalek = "1.0.1"
 sha3 = "0.10"
 rand = { version = "0.8", features = ["std"] }
+
+[[bin]]
+name = "supplyx_blockchain"
+path = "src/main.rs"
