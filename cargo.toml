@@ -6,4 +6,4 @@ edition = "2021"
 [dependencies]
 ed25519-dalek = "1.0.1"
 sha3 = "0.10"
-rand = "0.8"
+rand = { version = "0.8", features = ["std"] }
