@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::time::{SystemTime};
 use ed25519_dalek::{Keypair, PublicKey, Signature};
 use sha3::{Sha3_256, Digest};
-use rand::rngs::OsRng;
+use rand::{rngs::OsRng, Rng}; // Ajout de Rng
 
 // Structures principales
 #[derive(Clone, Debug)]
@@ -164,9 +164,10 @@ impl Blockchain {
         Ok(())
     }
 
-    fn ajuster_contribution_score(&mut self, pubkey: &PublicKey, ajustement: f64) {
+    // Correction du nom de la méthode et de l'argument
+    fn adjust_contribution_score(&mut self, pubkey: &PublicKey, adjustment: f64) {
         if let Some(validator) = self.validators.get_mut(pubkey) {
-            validator.contribution_score = (validator.contribution_score + ajustement).clamp(0.0, 10.0);
+            validator.contribution_score = (validator.contribution_score + adjustment).clamp(0.0, 10.0);
         }
     }
 }
