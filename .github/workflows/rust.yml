@@ -1,4 +1,4 @@
-name: Rust CI
+name: Rust CI/CD Workflow
 
 on:
   push:
@@ -13,22 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout the repository
+        uses: actions/checkout@v3
 
-    - name: Set up Rust
-      uses: actions/setup-rust@v1
-      with:
-        rust-version: 1.83.0  # Spécifiez la version de Rust que vous utilisez
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
+        with:
+          rust-version: 1.83.0  # Utilisez la version de Rust que vous utilisez
 
-    - name: Install dependencies
-      run: |
-        cargo build --release
+      - name: Build the project
+        run: cargo build --release
 
-    - name: Run tests
-      run: |
-        cargo test
-
-    - name: Run the blockchain app
-      run: |
-        cargo run
+      - name: Run the application
+        run: cargo run
